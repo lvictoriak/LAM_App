@@ -1,0 +1,65 @@
+﻿<Window x:Class="LAM_App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LAM_App"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="65"/>
+            <!--Header-->
+            <RowDefinition Height="*"/>
+            <!--Main body-->
+            <RowDefinition Height="65"/>
+            <!--Footer-->
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="#FF0068">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!--Логотип -->
+            <Image Source="/Снимок экрана_10-5-2026_71352_.jpeg" Margin="10,0,0,3" HorizontalAlignment="Left" Stretch="Uniform" Grid.ColumnSpan="2" Width="103"/>
+
+            <!-- Кнопка меню-->
+            <Button Grid.Column="2" Name="menu_btn" Width="60" Background="Transparent" BorderBrush="Transparent" 
+                     Margin="0,0,15,0" ToolTip="Открыть меню">
+                <Image Source="меню иконка.png" Height="35" Stretch="Uniform" Cursor="Hand"/>
+            </Button>
+        </Grid>
+
+        <Grid Grid.Row="1" Background="White">
+            <!-- Делим основную часть-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="300"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Margin="20" Background="#f60068" CornerRadius="8">
+                <!--Вставить расписание сюда-->
+                
+            </Border>
+
+            <StackPanel Grid.Column="1" Margin="20,0,20,0" VerticalAlignment="Center">
+                <Button Name="attendance_btn" Content="Посещаемость" Height="40" Margin="0,0,0,15" Background="#E5E5E5" BorderBrush="Transparent" FontSize="18" FontWeight="Medium" Cursor="Hand" AutomationProperties.Name="attendance_btn" Click="attendance_btn_Click"/>
+                <Button Name="payment_btn" Content="Оплаты" Height="40" Margin="0,0,0,15" Background="#E5E5E5" BorderBrush="Transparent" FontSize="18" FontWeight="Medium" Cursor="Hand" Click="payment_btn_Click"/>
+                <Button Name="trial_btn" Content="Пробные" Height="40" Margin="0,0,0,15" Background="#E5E5E5" BorderBrush="Transparent" FontSize="18" FontWeight="Medium" Cursor="Hand" Click="trial_btn_Click"/>
+                <Button Name="timetable_btn" Content="Расписание" Height="40" Margin="0,0,0,15" Background="#E5E5E5" BorderBrush="Transparent" FontSize="18" FontWeight="Medium" Cursor="Hand" Click="timetable_btn_Click"/>
+                <Button Name="price_btn" Content="Цены" Height="40" Margin="0,0,0,15" Background="#E5E5E5" BorderBrush="Transparent" FontSize="18" FontWeight="Medium" Cursor="Hand" AutomationProperties.Name="price_btn" Click="price_btn_Click"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="2" Background="#FF0068">
+            <!--Кнопка для записей-->
+            <Button Name="note_btn1" HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent" Margin="20,0,0,0" Cursor="Hand" ToolTip="Добавить запись" Click="note_btn1_Click">
+                <TextBlock Name="note_image" Text="✏️" FontSize="26" Foreground="White" Cursor="ArrowCD"/>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>
