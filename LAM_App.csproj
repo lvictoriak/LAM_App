@@ -19,8 +19,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="меню иконка.png" />
-    <Resource Include="Снимок экрана_10-5-2026_71352_.jpeg" />
+    <Resource Include="Resources\меню иконка.png" />
+    <Resource Include="Resources\Снимок экрана_10-5-2026_71352_.jpeg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
