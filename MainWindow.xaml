@@ -25,12 +25,12 @@
             </Grid.ColumnDefinitions>
 
             <!--Логотип -->
-            <Image Source="/Снимок экрана_10-5-2026_71352_.jpeg" Margin="10,0,0,3" HorizontalAlignment="Left" Stretch="Uniform" Grid.ColumnSpan="2" Width="103"/>
+            <Image Source="/Resources/Снимок экрана_10-5-2026_71352_.jpeg" Margin="10,0,0,3" HorizontalAlignment="Left" Stretch="Uniform" Grid.ColumnSpan="2" Width="103"/>
 
             <!-- Кнопка меню-->
             <Button Grid.Column="2" Name="menu_btn" Width="60" Background="Transparent" BorderBrush="Transparent" 
                      Margin="0,0,15,0" ToolTip="Открыть меню">
-                <Image Source="меню иконка.png" Height="35" Stretch="Uniform" Cursor="Hand"/>
+                <Image Source="/Resources/меню иконка.png" Height="35" Stretch="Uniform" Cursor="Hand"/>
             </Button>
         </Grid>
 

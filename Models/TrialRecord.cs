@@ -57,6 +57,5 @@ namespace LAM_App.Models
         [Column("to_comment")]
         public string? Comment { get; set; }
 
-        // Навигационные свойства (уже определены выше через ForeignKey)
     }
 }

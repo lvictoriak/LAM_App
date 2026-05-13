@@ -29,18 +29,15 @@ namespace LAM_App.Models
         public string? ScheduleOptions { get; set; }
 
         [Column("teacher")]
-        public int? TeacherId { get; set; } // Если направление привязано к одному преподавателю
+        public int? TeacherId { get; set; }
 
         [Column("to_comment")]
         public string? Comment { get; set; }
 
-        // Связь: у одного стиля много записей на пробные
         public ICollection<TrialRecord> TrialRecords { get; set; } = new List<TrialRecord>();
 
-        // Связь: у одного стиля много клиентов (если клиент выбирает стиль)
         public ICollection<Client> Clients { get; set; } = new List<Client>();
 
-        // Связь: у одного стиля много платежей (если платеж привязан к стилю)
         public ICollection<PaymentLog> PaymentLogs { get; set; } = new List<PaymentLog>();
     }
 }

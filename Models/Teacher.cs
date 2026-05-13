@@ -45,7 +45,6 @@ namespace LAM_App.Models
         [Column("date_birth")]
         public DateTime? BirthDate { get; set; }
 
-        // Связь: преподаватель может вести несколько пробных записей
         public ICollection<TrialRecord> TrialRecords { get; set; } = new List<TrialRecord>();
     }
 }

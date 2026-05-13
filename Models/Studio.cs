@@ -29,7 +29,6 @@ namespace LAM_App.Models
         [MaxLength(20)]
         public string? Phone { get; set; }
 
-        // Связь: у одной студии много преподавателей
         public ICollection<Teacher> Teachers { get; set; } = new List<Teacher>();
 
         // Связь: у одной студии много направлений

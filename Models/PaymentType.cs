@@ -20,7 +20,6 @@ namespace LAM_App.Models
         [MaxLength(50)]
         public string Name { get; set; } = string.Empty;
 
-        // Связь: у вида оплаты много логов платежей
         public ICollection<PaymentLog> PaymentLogs { get; set; } = new List<PaymentLog>();
     }
 }

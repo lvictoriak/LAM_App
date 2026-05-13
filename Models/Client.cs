@@ -57,7 +57,6 @@ namespace LAM_App.Models
         [Column("to_comment")]
         public string? Comment { get; set; }
 
-        // Связь: у клиента много записей на пробные
         public ICollection<TrialRecord> TrialRecords { get; set; } = new List<TrialRecord>();
     }
 }
