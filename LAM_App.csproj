@@ -10,6 +10,12 @@
 
   <ItemGroup>
     <None Remove="меню иконка.png" />
+    <None Remove="взрослые расписание.jpg" />
+    <None Remove="индивы.jpg" />
+    <None Remove="прайс взрослые.jpg" />
+    <None Remove="прайс дети.PNG" />
+    <None Remove="Слайд1.JPG" />
+    <None Remove="Слайд2.JPG" />
     <None Remove="Снимок экрана_10-5-2026_71352_.jpeg" />
   </ItemGroup>
 
@@ -20,7 +26,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\взрослые расписание.jpg" />
+    <Resource Include="Resources\индивы.jpg" />
     <Resource Include="Resources\меню иконка.png" />
+    <Resource Include="Resources\прайс взрослые.jpg" />
+    <Resource Include="Resources\прайс дети.PNG" />
+    <Resource Include="Resources\Слайд1.JPG" />
+    <Resource Include="Resources\Слайд2.JPG" />
     <Resource Include="Resources\Снимок экрана_10-5-2026_71352_.jpeg" />
   </ItemGroup>
 
@@ -32,6 +44,121 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="AdultsTimetableWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Update="AdultsTimetableWindow.xaml.cs">
+      <DependentUpon>AdultsTimetableWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Update="AttendanceWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Update="AttendanceWindow.xaml.cs">
+      <DependentUpon>AttendanceWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Update="EditAttendanceMarkWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Update="EditAttendanceMarkWindow.xaml.cs">
+      <DependentUpon>EditAttendanceMarkWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Update="MedicalCertificateWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Update="MedicalCertificateWindow.xaml.cs">
+      <DependentUpon>MedicalCertificateWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Update="AdultsPriceWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Update="AdultsPriceWindow.xaml.cs">
+      <DependentUpon>AdultsPriceWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Update="ClientsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Update="ClientsWindow.xaml.cs">
+      <DependentUpon>ClientsWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Update="ImageViewerWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Update="ImageViewerWindow.xaml.cs">
+      <DependentUpon>ImageViewerWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Update="MarkAttendanceWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Update="MarkAttendanceWindow.xaml.cs">
+      <DependentUpon>MarkAttendanceWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Update="PaymentsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Update="PaymentsWindow.xaml.cs">
+      <DependentUpon>PaymentsWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Update="PriceWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Update="PriceWindow.xaml.cs">
+      <DependentUpon>PriceWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Update="TeachersWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Update="TeachersWindow.xaml.cs">
+      <DependentUpon>TeachersWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Update="StylesWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Update="StylesWindow.xaml.cs">
+      <DependentUpon>StylesWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Update="TimetableWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Update="TimetableWindow.xaml.cs">
+      <DependentUpon>TimetableWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Update="TrialsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Update="TrialsWindow.xaml.cs">
+      <DependentUpon>TrialsWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>

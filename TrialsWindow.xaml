@@ -1,0 +1,204 @@
+﻿<Window x:Class="LAM_App.TrialsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Пробные занятия" Height="750" Width="1400"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <DataTemplate x:Key="TrialCardTemplate">
+            <Border Background="White" CornerRadius="8" Padding="10" Margin="0,0,0,10" BorderBrush="#DDD" BorderThickness="1" Cursor="Hand">
+                <StackPanel>
+                    <TextBlock Text="{Binding ChildName, TargetNullValue=Без имени}" FontWeight="Bold" FontSize="14"/>
+                    <Grid Margin="0,6,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="82"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Родитель:" FontSize="12" Foreground="Gray"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding ParentName, TargetNullValue=-}" FontSize="12" TextWrapping="Wrap"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Телефон:" FontSize="12" Foreground="Gray"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ParentPhone, TargetNullValue=-}" FontSize="12" TextWrapping="Wrap"/>
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Дата:" FontSize="12" Foreground="Gray"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding TrialDate, StringFormat={}{0:dd.MM.yyyy}, TargetNullValue=-}" FontSize="12"/>
+
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Направл.:" FontSize="12" Foreground="Gray"/>
+                        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Style.Name, TargetNullValue=-}" FontSize="12" TextWrapping="Wrap"/>
+                    </Grid>
+                    <TextBlock Text="{Binding Comment}" FontSize="11" FontStyle="Italic" Foreground="Gray" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid Background="#F5F5F5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="65"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid Grid.Row="0" Background="#FF0068">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Логотип-->
+            <Button Grid.Column="0" Click="Logo_Click" Background="Transparent" BorderBrush="Transparent" Cursor="Hand" Margin="10,0,0,0">
+                <Image Source="/Resources/Снимок экрана_10-5-2026_71352_.jpeg" Height="45" Stretch="Uniform"/>
+            </Button>
+
+            <TextBlock Grid.Column="1" Text="Пробные занятия" FontSize="32" FontWeight="Medium" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            <!-- Menu -->
+            <Button Grid.Column="2" Name="menu_btn" Width="60" Background="Transparent" BorderBrush="Transparent" Margin="0,0,15,0" Click="menu_btn_Click">
+                <Image Source="/Resources/меню иконка.png" Height="35" Stretch="Uniform" Cursor="Hand"/>
+            </Button>
+            <!-- Выпадающее меню -->
+            <Popup Name="menuPopup" Placement="Right" PlacementTarget="{Binding ElementName=menu_btn}" 
+                StaysOpen="False" AllowsTransparency="True" PopupAnimation="Fade">
+                <Border Background="#FFB6D4" BorderBrush="#FF0068" BorderThickness="2" CornerRadius="8" Padding="5" Width="200">
+                    <StackPanel>
+                        <Button Content="Клиенты" Height="45" Background="#FFB6D4" BorderBrush="Transparent" 
+                            FontSize="16" Cursor="Hand" Margin="0,0,0,2" Click="clients_btn_Click"/>
+                        <Button Content="Тренеры" Height="45" Background="#FFB6D4" BorderBrush="Transparent" 
+                            FontSize="16" Cursor="Hand" Margin="0,0,0,2" Click="teachers_btn_Click"/>
+                        <Button Content="Направления" Height="45" Background="#FFB6D4" BorderBrush="Transparent" 
+                            FontSize="16" Cursor="Hand" Click="styles_btn_Click"/>
+                    </StackPanel>
+                </Border>
+            </Popup>
+        </Grid>
+
+        <!-- Main Content -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
+        <Grid Margin="10" MinWidth="1150">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="350"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- На пробном -->
+            <Grid Grid.Column="0" Margin="0,0,5,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="На пробном" FontWeight="Bold" FontSize="16" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <ListBox x:Name="lbScheduled" Background="Transparent" BorderThickness="0" 
+                             SelectionChanged="ListBox_SelectionChanged"
+                             ItemTemplate="{StaticResource TrialCardTemplate}"/>
+                </ScrollViewer>
+            </Grid>
+
+            <!-- Пришли -->
+            <Grid Grid.Column="1" Margin="5,0,5,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Пришли" FontWeight="Bold" FontSize="16" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <ListBox x:Name="lbAttended" Background="Transparent" BorderThickness="0" SelectionChanged="ListBox_SelectionChanged"
+                             ItemTemplate="{StaticResource TrialCardTemplate}"/>
+                </ScrollViewer>
+            </Grid>
+
+            <!-- Купили -->
+            <Grid Grid.Column="2" Margin="5,0,5,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Купили" FontWeight="Bold" FontSize="16" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <ListBox x:Name="lbBought" Background="Transparent" BorderThickness="0" SelectionChanged="ListBox_SelectionChanged"
+                             ItemTemplate="{StaticResource TrialCardTemplate}"/>
+                </ScrollViewer>
+            </Grid>
+
+            <!-- Другое -->
+            <Grid Grid.Column="3" Margin="5,0,5,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Другое" FontWeight="Bold" FontSize="16" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <ListBox x:Name="lbOther" Background="Transparent" BorderThickness="0" SelectionChanged="ListBox_SelectionChanged"
+                             ItemTemplate="{StaticResource TrialCardTemplate}"/>
+                </ScrollViewer>
+            </Grid>
+
+            <!-- Right Panel: Edit Form -->
+            <Border Grid.Column="4" Background="White" CornerRadius="8" Padding="15" BorderBrush="#DDD" BorderThickness="1" Margin="10,0,0,0">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <StackPanel>
+                    <TextBlock Text="Статус:" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <ComboBox x:Name="cbStatus" Margin="0,0,0,15">
+                        <ComboBoxItem Content="На пробном"/>
+                        <ComboBoxItem Content="Пришли"/>
+                        <ComboBoxItem Content="Купили"/>
+                        <ComboBoxItem Content="Другое"/>
+                    </ComboBox>
+
+                    <TextBlock Text="ФИО родителя:" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <TextBox x:Name="txtParentName" Margin="0,0,0,10"/>
+
+                    <TextBlock Text="Телефон:" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <TextBox x:Name="txtPhone" Margin="0,0,0,10"/>
+
+                    <TextBlock Text="ФИО ребенка:" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <TextBox x:Name="txtChildName" Margin="0,0,0,10"/>
+
+                    <TextBlock Text="Возраст:" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <TextBox x:Name="txtAge" Margin="0,0,0,10"/>
+
+                    <TextBlock Text="Группа (Направление):" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <ComboBox x:Name="txtGroup" Margin="0,0,0,10"
+                              IsEditable="True"
+                              DisplayMemberPath="Name"
+                              SelectedValuePath="Id"/>
+
+                    <TextBlock Text="Дата пробного:" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <DatePicker x:Name="dpDate" Margin="0,0,0,15"/>
+
+                    <TextBlock Text="Комментарий:" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <TextBox x:Name="txtComment" Height="60" TextWrapping="Wrap" AcceptsReturn="True" Margin="0,0,0,15"/>
+
+                    <WrapPanel HorizontalAlignment="Center">
+                        <Button Content="Очистить" Width="100" Height="30" Margin="5" Click="clear_btn_Click" Background="#E5E5E5" BorderBrush="Transparent"/>
+                        <Button Content="Сохранить" Width="100" Height="30" Margin="5" Click="save_btn_Click" Background="#E5E5E5" BorderBrush="Transparent"/>
+                        <Button Content="Удалить" Width="100" Height="30" Margin="5" Click="delete_btn_Click" Background="#E5E5E5" BorderBrush="Transparent"/>
+                        <Button Content="Обновить" Width="100" Height="30" Margin="5" Click="update_btn_Click" Background="#E5E5E5" BorderBrush="Transparent"/>
+                    </WrapPanel>
+                </StackPanel>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+        </ScrollViewer>
+
+        <!-- Footer -->
+        <Grid Grid.Row="2" Background="#FF0068">
+            <Button Content="Отчет" FontSize="18" FontWeight="Medium" 
+                    HorizontalAlignment="Right" Width="200" Height="40" Margin="0,0,20,0"
+                    Click="report_btn_Click" Background="#1a1a2e" Foreground="White" 
+                    BorderBrush="Transparent" Cursor="Hand"/>
+        </Grid>
+    </Grid>
+</Window>

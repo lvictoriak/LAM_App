@@ -1,0 +1,51 @@
+<Window x:Class="LAM_App.MedicalCertificateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Справка" Height="335" Width="460"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+    <Grid Background="White" Margin="18">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Отметить справку" FontSize="20" FontWeight="Bold" Margin="0,0,0,16"/>
+
+        <StackPanel Grid.Row="1" Margin="0,0,0,12">
+            <TextBlock Text="Выберите ребенка:" FontWeight="Bold" Margin="0,0,0,5"/>
+            <ComboBox x:Name="cbClient" Height="30" DisplayMemberPath="DisplayName" SelectedValuePath="Id"
+                      ToolTip="Выберите ребенка, которому нужно отметить справку"/>
+        </StackPanel>
+
+        <Grid Grid.Row="2" Margin="0,0,0,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="14"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="С даты:" FontWeight="Bold" Margin="0,0,0,5"/>
+                <DatePicker x:Name="dpFrom" Height="30" ToolTip="Дата начала справки"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2">
+                <TextBlock Text="По дату:" FontWeight="Bold" Margin="0,0,0,5"/>
+                <DatePicker x:Name="dpTo" Height="30" ToolTip="Дата окончания справки"/>
+            </StackPanel>
+        </Grid>
+
+        <TextBlock Grid.Row="3" Text="Справка действует только на пропущенные занятия: обычные «н» станут «нб» и не будут списывать абонемент. Если в этот день стоит занятие, оно останется занятием."
+                   Foreground="#666" TextWrapping="Wrap" VerticalAlignment="Top"/>
+
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Отмена" Width="110" Height="34" Margin="0,0,10,0"
+                    Background="#E5E5E5" BorderBrush="Transparent" Click="cancel_btn_Click"/>
+            <Button Content="Сохранить" Width="130" Height="34"
+                    Background="#FF0068" Foreground="White" BorderBrush="Transparent" Click="save_btn_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

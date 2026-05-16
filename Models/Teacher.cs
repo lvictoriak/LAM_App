@@ -17,13 +17,12 @@ namespace LAM_App.Models
 
         [ForeignKey("Studio")]
         [Column("studio_id")]
-        public int StudioId { get; set; }
+        public int? StudioId { get; set; }
         public Studio? Studio { get; set; }
 
-        [Required]
         [Column("full_name")]
         [MaxLength(150)]
-        public string FullName { get; set; } = string.Empty;
+        public string? FullName { get; set; }
 
         [Column("phone")]
         [MaxLength(20)]

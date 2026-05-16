@@ -13,7 +13,7 @@ namespace LAM_App.Models
     {
         [Key]
         [Column("payment_id")]
-        public int Id { get; set; }
+        public int PaymentId { get; set; }
 
         [Column("payment_date")]
         public DateTime PaymentDate { get; set; } = DateTime.Now;

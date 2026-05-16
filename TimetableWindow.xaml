@@ -1,0 +1,140 @@
+<Window x:Class="LAM_App.TimetableWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Расписание" Height="750" Width="1400"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style x:Key="SwitchButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#D9D9D9"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Height" Value="42"/>
+            <Setter Property="Width" Value="260"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="#FF0068"/>
+                    <Setter Property="Opacity" Value="1"/>
+                    <Setter Property="Cursor" Value="Arrow"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="65"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="65"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="#FF0068">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Click="Logo_Click" Background="Transparent" BorderBrush="Transparent" Cursor="Hand" Margin="10,0,0,0">
+                <Image Source="/Resources/Снимок экрана_10-5-2026_71352_.jpeg" Height="45" Stretch="Uniform"/>
+            </Button>
+
+            <TextBlock Grid.Column="1" Text="Расписание" FontSize="32" FontWeight="Medium"
+                       Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            <Button Grid.Column="2" Name="menu_btn" Width="60" Background="Transparent" BorderBrush="Transparent"
+                    Margin="0,0,15,0" ToolTip="Открыть меню" Click="menu_btn_Click">
+                <Image Source="/Resources/меню иконка.png" Height="35" Stretch="Uniform" Cursor="Hand"/>
+            </Button>
+
+            <Popup Name="menuPopup" Placement="Right" PlacementTarget="{Binding ElementName=menu_btn}"
+                   StaysOpen="False" AllowsTransparency="True" PopupAnimation="Fade">
+                <Border Background="#FFB6D4" BorderBrush="#FF0068" BorderThickness="2" CornerRadius="8" Padding="5" Width="200">
+                    <StackPanel>
+                        <Button Content="Клиенты" Height="45" Background="#FFB6D4" BorderBrush="Transparent"
+                                FontSize="16" Cursor="Hand" Margin="0,0,0,2" Click="clients_btn_Click"/>
+                        <Button Content="Тренеры" Height="45" Background="#FFB6D4" BorderBrush="Transparent"
+                                FontSize="16" Cursor="Hand" Margin="0,0,0,2" Click="teachers_btn_Click"/>
+                        <Button Content="Направления" Height="45" Background="#FFB6D4" BorderBrush="Transparent"
+                                FontSize="16" Cursor="Hand" Click="styles_btn_Click"/>
+                    </StackPanel>
+                </Border>
+            </Popup>
+        </Grid>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <Grid Background="White" Margin="80,32,80,24" MinWidth="1100" MinHeight="560">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="96"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="28"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" HorizontalAlignment="Center">
+                        <Image x:Name="imgScheduleFirst" Source="/Resources/Слайд1.JPG" Stretch="Uniform"
+                               MaxWidth="520" MaxHeight="310" Cursor="Hand" ToolTip="Открыть"
+                               MouseLeftButtonUp="openScheduleFirst_btn_Click"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,12,0,0">
+                            <Button Content="Загрузить" Width="120" Height="30" Margin="5"
+                                    Background="#D9D9D9" BorderBrush="Transparent" Cursor="Hand"
+                                    Click="loadScheduleFirst_btn_Click"/>
+                            <Button Content="Удалить" Width="120" Height="30" Margin="5"
+                                    Background="#D9D9D9" BorderBrush="Transparent" Cursor="Hand"
+                                    Click="deleteScheduleFirst_btn_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2" HorizontalAlignment="Center">
+                        <Image x:Name="imgScheduleSecond" Source="/Resources/Слайд2.JPG" Stretch="Uniform"
+                               MaxWidth="520" MaxHeight="310" Cursor="Hand" ToolTip="Открыть"
+                               MouseLeftButtonUp="openScheduleSecond_btn_Click"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,12,0,0">
+                            <Button Content="Загрузить" Width="120" Height="30" Margin="5"
+                                    Background="#D9D9D9" BorderBrush="Transparent" Cursor="Hand"
+                                    Click="loadScheduleSecond_btn_Click"/>
+                            <Button Content="Удалить" Width="120" Height="30" Margin="5"
+                                    Background="#D9D9D9" BorderBrush="Transparent" Cursor="Hand"
+                                    Click="deleteScheduleSecond_btn_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Row="1" VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0" Name="children_btn" Content="для детей"
+                            Style="{StaticResource SwitchButtonStyle}" IsEnabled="False"
+                            Click="children_btn_Click"/>
+                    <Button Grid.Column="1" Name="adults_btn" Content="для взрослых"
+                            Style="{StaticResource SwitchButtonStyle}"
+                            Click="adults_btn_Click"/>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+
+        <Grid Grid.Row="2" Background="#FF0068">
+            <Button Name="note_btn1" HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent"
+                    Margin="20,0,0,0" Cursor="Hand" ToolTip="Добавить запись" Click="note_btn1_Click">
+                <TextBlock Name="note_image" Text="✏️" FontSize="26" Foreground="White"/>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

@@ -17,42 +17,39 @@ namespace LAM_App.Models
 
         [ForeignKey("TrialStatus")]
         [Column("status_id")]
-        public int StatusId { get; set; }
+        public int? StatusId { get; set; }
         public TrialStatus? Status { get; set; }
 
         [ForeignKey("Style")]
         [Column("style_id")]
-        public int StyleId { get; set; }
+        public int? StyleId { get; set; }
         public Style? Style { get; set; }
 
         [ForeignKey("Teacher")]
         [Column("instructor_id")]
-        public int InstructorId { get; set; }
+        public int? InstructorId { get; set; }
         public Teacher? Instructor { get; set; }
 
-        [Required]
         [Column("parent_name")]
         [MaxLength(150)]
-        public string ParentName { get; set; } = string.Empty;
+        public string? ParentName { get; set; }
 
-        [Required]
         [Column("parent_phone")]
         [MaxLength(20)]
-        public string ParentPhone { get; set; } = string.Empty;
+        public string? ParentPhone { get; set; }
 
-        [Required]
         [Column("child_name")]
         [MaxLength(150)]
-        public string ChildName { get; set; } = string.Empty;
+        public string? ChildName { get; set; }
 
         [Column("child_age")]
         public int? ChildAge { get; set; }
 
         [Column("trial_date")]
-        public DateTime TrialDate { get; set; }
+        public DateTime? TrialDate { get; set; }
 
         [Column("record_date")]
-        public DateTime RecordDate { get; set; } = DateTime.Now;
+        public DateTime? RecordDate { get; set; } = DateTime.UtcNow;
 
         [Column("to_comment")]
         public string? Comment { get; set; }

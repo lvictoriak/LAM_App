@@ -1,0 +1,108 @@
+<Window x:Class="LAM_App.AttendanceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Посещаемость" Height="750" Width="1400"
+        WindowStartupLocation="CenterScreen">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="65"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="#FF0068">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Click="Logo_Click" Background="Transparent" BorderBrush="Transparent" Cursor="Hand" Margin="10,0,0,0">
+                <Image Source="/Resources/Снимок экрана_10-5-2026_71352_.jpeg" Height="45" Stretch="Uniform"/>
+            </Button>
+
+            <TextBlock Grid.Column="1" Text="Посещаемость" FontSize="32" FontWeight="Medium"
+                       Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            <Button Grid.Column="2" Name="menu_btn" Width="60" Background="Transparent" BorderBrush="Transparent"
+                    Margin="0,0,15,0" ToolTip="Открыть меню" Click="menu_btn_Click">
+                <Image Source="/Resources/меню иконка.png" Height="35" Stretch="Uniform" Cursor="Hand"/>
+            </Button>
+
+            <Popup Name="menuPopup" Placement="Right" PlacementTarget="{Binding ElementName=menu_btn}"
+                   StaysOpen="False" AllowsTransparency="True" PopupAnimation="Fade">
+                <Border Background="#FFB6D4" BorderBrush="#FF0068" BorderThickness="2" CornerRadius="8" Padding="5" Width="200">
+                    <StackPanel>
+                        <Button Content="Клиенты" Height="45" Background="#FFB6D4" BorderBrush="Transparent"
+                                FontSize="16" Cursor="Hand" Margin="0,0,0,2" Click="clients_btn_Click"/>
+                        <Button Content="Тренеры" Height="45" Background="#FFB6D4" BorderBrush="Transparent"
+                                FontSize="16" Cursor="Hand" Margin="0,0,0,2" Click="teachers_btn_Click"/>
+                        <Button Content="Направления" Height="45" Background="#FFB6D4" BorderBrush="Transparent"
+                                FontSize="16" Cursor="Hand" Click="styles_btn_Click"/>
+                    </StackPanel>
+                </Border>
+            </Popup>
+        </Grid>
+
+        <Border Grid.Row="1" Background="#F5F5F5" Padding="8">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="190"/>
+                    <ColumnDefinition Width="145"/>
+                    <ColumnDefinition Width="12"/>
+                    <ColumnDefinition Width="125"/>
+                    <ColumnDefinition Width="92"/>
+                    <ColumnDefinition Width="118"/>
+                    <ColumnDefinition Width="12"/>
+                    <ColumnDefinition Width="245"/>
+                    <ColumnDefinition Width="225"/>
+                    <ColumnDefinition Width="86"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Направление" FontSize="11" Foreground="#555" Margin="0,0,8,3"/>
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="Месяц" FontSize="11" Foreground="#555" Margin="0,0,8,3"/>
+                <TextBlock Grid.Row="0" Grid.Column="3" Text="Отметка" FontSize="11" Foreground="#555" Margin="0,0,8,3"/>
+                <TextBlock Grid.Row="0" Grid.Column="4" Text="Справка" FontSize="11" Foreground="#555" Margin="0,0,8,3"/>
+                <TextBlock Grid.Row="0" Grid.Column="5" Text="Столбец" FontSize="11" Foreground="#555" Margin="0,0,8,3"/>
+                <TextBlock Grid.Row="0" Grid.Column="7" Text="Абонемент к оплате" FontSize="11" Foreground="#555" Margin="0,0,8,3"/>
+                <TextBlock Grid.Row="0" Grid.Column="8" Text="Выберите оплату" FontSize="11" Foreground="#555" Margin="0,0,8,3"/>
+                <TextBlock Grid.Row="0" Grid.Column="9" Text="Оплата" FontSize="11" Foreground="#555" Margin="0,0,0,3"/>
+
+                <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Width="1" Background="#D0D0D0" Margin="4,0"/>
+                <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="6" Width="1" Background="#D0D0D0" Margin="4,0"/>
+
+                <ComboBox Grid.Row="1" Grid.Column="0" x:Name="cbStyle" Height="29" DisplayMemberPath="Name" SelectedValuePath="Id"
+                          ToolTip="Выберите направление" SelectionChanged="cbStyle_SelectionChanged" Margin="0,0,8,0"/>
+                <DatePicker Grid.Row="1" Grid.Column="1" x:Name="dpMonth" Height="29"
+                            ToolTip="Выберите месяц" SelectedDateChanged="dpMonth_SelectedDateChanged" Margin="0,0,8,0"/>
+                <Button Grid.Row="1" Grid.Column="3" Content="Отметить" Height="29"
+                        Background="#FF0068" Foreground="White" BorderBrush="Transparent" Margin="0,0,8,0"
+                        ToolTip="Отметить детей на занятии" Click="markChildren_btn_Click"/>
+                <Button Grid.Row="1" Grid.Column="4" Content="Справка" Height="29"
+                        Background="#FF0068" Foreground="White" BorderBrush="Transparent" Margin="0,0,8,0"
+                        ToolTip="Отметить справку для пропусков ребенка" Click="certificate_btn_Click"/>
+                <Button Grid.Row="1" Grid.Column="5" x:Name="deleteColumn_btn" Content="Удалить" Height="29"
+                        Background="#D9D9D9" BorderBrush="Transparent" IsEnabled="False" Margin="0,0,8,0"
+                        ToolTip="Выберите дату в таблице, затем удалите столбец" Click="deleteColumn_btn_Click"/>
+
+                <ComboBox Grid.Row="1" Grid.Column="7" x:Name="cbUnpaidSubscriptions" Height="29" DisplayMemberPath="DisplayName"
+                          SelectedValuePath="Id" ToolTip="Выберите неоплаченный абонемент" Margin="0,0,8,0"/>
+                <ComboBox Grid.Row="1" Grid.Column="8" x:Name="cbPayments" Height="29" DisplayMemberPath="DisplayName"
+                          SelectedValuePath="PaymentId" ToolTip="Выберите платеж, которым закрыт абонемент" Margin="0,0,8,0"/>
+                <Button Grid.Row="1" Grid.Column="9" Content="Оплатили" Height="29"
+                        Background="#D9D9D9" BorderBrush="Transparent" Click="markPaid_btn_Click"/>
+            </Grid>
+        </Border>
+
+        <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <Grid x:Name="AttendanceGrid" Margin="10"/>
+        </ScrollViewer>
+
+        <Grid Grid.Row="3" Background="#FF0068"/>
+    </Grid>
+</Window>

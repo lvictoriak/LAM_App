@@ -43,7 +43,8 @@ namespace LAM_App
                 DbContext = new AppDbContext(optionsBuilder.Options);
 
                 //Проверка связи
-                DbContext.Database.CanConnect(); 
+                DbContext.Database.CanConnect();
+                DbContext.EnsureAttendanceSchema();
             }
             catch (Exception ex)
             {
@@ -53,6 +54,7 @@ namespace LAM_App
             }
 
             var mainWindow = new MainWindow();
+            ShutdownMode = ShutdownMode.OnLastWindowClose;
             mainWindow.Show();
         }
     }

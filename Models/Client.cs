@@ -15,25 +15,21 @@ namespace LAM_App.Models
         [Column("client_id")]
         public int Id { get; set; }
 
-        [Required]
         [Column("parent_name")]
         [MaxLength(150)]
-        public string ParentName { get; set; } = string.Empty;
+        public string? ParentName { get; set; }
 
-        [Required]
         [Column("parent_phone")]
         [MaxLength(20)]
-        public string ParentPhone { get; set; } = string.Empty;
+        public string? ParentPhone { get; set; }
 
-        [Required]
         [Column("child_surname")]
         [MaxLength(100)]
-        public string ChildSurname { get; set; } = string.Empty;
+        public string? ChildSurname { get; set; }
 
-        [Required]
         [Column("child_name")]
         [MaxLength(100)]
-        public string ChildName { get; set; } = string.Empty;
+        public string? ChildName { get; set; }
 
         [Column("child_patronymic")]
         [MaxLength(100)]
@@ -47,16 +43,15 @@ namespace LAM_App.Models
 
         [Column("shift")]
         [MaxLength(50)]
-        public string? Shift { get; set; } // Учебная смена или группа
+        public string? Shift { get; set; } //учебная смена
 
         [ForeignKey("Style")]
-        [Column("style_name")] // Внимание: в диаграмме это integer, но названо style_name — возможно, ошибка именования
+        [Column("style_name")]
         public int? StyleId { get; set; }
         public Style? Style { get; set; }
 
         [Column("to_comment")]
         public string? Comment { get; set; }
 
-        public ICollection<TrialRecord> TrialRecords { get; set; } = new List<TrialRecord>();
     }
 }

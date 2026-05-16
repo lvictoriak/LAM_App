@@ -1,0 +1,82 @@
+<Window x:Class="LAM_App.MarkAttendanceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Отметить детей" Height="650" Width="520"
+        WindowStartupLocation="CenterOwner">
+    <Grid Background="White" Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="Направление:" FontWeight="Bold" Margin="0,0,0,5"/>
+            <ComboBox x:Name="cbStyle" Height="30" DisplayMemberPath="Name" SelectedValuePath="Id"
+                      SelectionChanged="cbStyle_SelectionChanged" Margin="0,0,0,12"/>
+
+            <Grid Margin="0,0,0,12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="12"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Дата занятия:" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <DatePicker x:Name="dpSessionDate" Height="30"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2">
+                    <TextBlock Text="Детей на занятии:" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <TextBox x:Name="txtChildrenCount" Height="30"/>
+                </StackPanel>
+            </Grid>
+
+            <Grid Margin="0,0,0,12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="12"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Новый абонемент:" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <ComboBox x:Name="cbSubscriptionLessons" Height="30">
+                        <ComboBoxItem Content="4"/>
+                        <ComboBoxItem Content="8"/>
+                        <ComboBoxItem Content="12" IsSelected="True"/>
+                        <ComboBoxItem Content="16"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2">
+                    <TextBlock Text="Списать:" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <ComboBox x:Name="cbWriteOffCount" Height="30">
+                        <ComboBoxItem Content="1" IsSelected="True"/>
+                        <ComboBoxItem Content="2"/>
+                    </ComboBox>
+                </StackPanel>
+            </Grid>
+
+            <TextBlock Text="Замена педагога:" FontWeight="Bold" Margin="0,0,0,5"/>
+            <ComboBox x:Name="cbSubstituteTeacher" Height="30" DisplayMemberPath="FullName" SelectedValuePath="Id"
+                      IsEditable="True" Margin="0,0,0,12"/>
+
+            <TextBlock Text="Отсутствующие:" FontWeight="Bold" Margin="0,0,0,5"/>
+        </StackPanel>
+
+        <Border Grid.Row="1" BorderBrush="#DDD" BorderThickness="1" Padding="8">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="AbsentListPanel"/>
+            </ScrollViewer>
+        </Border>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,16,0,0">
+            <Button Content="Отмена" Width="110" Height="34" Margin="0,0,10,0"
+                    Background="#E5E5E5" BorderBrush="Transparent" Click="cancel_btn_Click"/>
+            <Button Content="Сохранить" Width="130" Height="34"
+                    Background="#FF0068" Foreground="White" BorderBrush="Transparent" Click="save_btn_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

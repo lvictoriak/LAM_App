@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LAM_App"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="LAM" Height="750" Width="1400"
+        WindowStartupLocation="CenterScreen">
     <Grid>
 
         <Grid.RowDefinitions>
@@ -29,12 +30,28 @@
 
             <!-- Кнопка меню-->
             <Button Grid.Column="2" Name="menu_btn" Width="60" Background="Transparent" BorderBrush="Transparent" 
-                     Margin="0,0,15,0" ToolTip="Открыть меню">
+                     Margin="0,0,15,0" ToolTip="Открыть меню" Click="menu_btn_Click">
                 <Image Source="/Resources/меню иконка.png" Height="35" Stretch="Uniform" Cursor="Hand"/>
             </Button>
+
+            <!-- Выпадающее меню -->
+            <Popup Name="menuPopup" Placement="Right" PlacementTarget="{Binding ElementName=menu_btn}" 
+                   StaysOpen="False" AllowsTransparency="True" PopupAnimation="Fade">
+                <Border Background="#FFB6D4" BorderBrush="#FF0068" BorderThickness="2" CornerRadius="8" Padding="5" Width="200">
+                    <StackPanel>
+                        <Button Content="Клиенты" Height="45" Background="#FFB6D4" BorderBrush="Transparent" 
+                                FontSize="16" Cursor="Hand" Margin="0,0,0,2" Click="clients_btn_Click"/>
+                        <Button Content="Тренеры" Height="45" Background="#FFB6D4" BorderBrush="Transparent" 
+                                FontSize="16" Cursor="Hand" Margin="0,0,0,2" Click="teachers_btn_Click"/>
+                        <Button Content="Направления" Height="45" Background="#FFB6D4" BorderBrush="Transparent" 
+                                FontSize="16" Cursor="Hand" Click="styles_btn_Click"/>
+                    </StackPanel>
+                </Border>
+            </Popup>
         </Grid>
 
-        <Grid Grid.Row="1" Background="White">
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <Grid Background="White" MinWidth="1100" MinHeight="560">
             <!-- Делим основную часть-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -43,7 +60,7 @@
 
             <Border Grid.Column="0" Margin="20" Background="#f60068" CornerRadius="8">
                 <!--Вставить расписание сюда-->
-                
+
             </Border>
 
             <StackPanel Grid.Column="1" Margin="20,0,20,0" VerticalAlignment="Center">
@@ -54,6 +71,7 @@
                 <Button Name="price_btn" Content="Цены" Height="40" Margin="0,0,0,15" Background="#E5E5E5" BorderBrush="Transparent" FontSize="18" FontWeight="Medium" Cursor="Hand" AutomationProperties.Name="price_btn" Click="price_btn_Click"/>
             </StackPanel>
         </Grid>
+        </ScrollViewer>
 
         <Grid Grid.Row="2" Background="#FF0068">
             <!--Кнопка для записей-->
