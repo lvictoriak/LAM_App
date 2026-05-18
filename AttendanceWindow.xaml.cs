@@ -24,6 +24,7 @@ namespace LAM_App
         private readonly Brush _medicalBrush = new SolidColorBrush(Color.FromRgb(222, 240, 255));
         private readonly Brush _whiteBrush = Brushes.White;
         private int? _selectedSessionId;
+        private double _lastJournalViewportWidth;
 
         public AttendanceWindow()
         {
@@ -31,6 +32,7 @@ namespace LAM_App
             _context = App.DbContext;
             dpMonth.SelectedDate = DateTime.Today;
             LoadSelectors();
+            Loaded += (_, _) => LoadJournal();
         }
 
         private void LoadSelectors()
@@ -98,10 +100,12 @@ namespace LAM_App
                 deleteColumn_btn.IsEnabled = false;
             }
 
-            BuildGridStructure(clients.Count, sessions.Count);
+            var displayedSessionColumns = GetDisplayedSessionColumns(sessions.Count);
+
+            BuildGridStructure(clients.Count, displayedSessionColumns);
             AddCell(0, 0, "", _headerBrush, 42, FontWeights.Bold);
             AddCell(0, 1, selectedStyle?.Name ?? "Направление", _subHeaderBrush, 22, FontWeights.Normal);
-            AddCell(1, 0, monthStart.ToString("MMMM").ToUpperInvariant(), _headerBrush, 42, FontWeights.Bold, Math.Max(1, sessions.Count));
+            AddCell(1, 0, monthStart.ToString("MMMM").ToUpperInvariant(), _headerBrush, 42, FontWeights.Bold, displayedSessionColumns);
 
             for (var i = 0; i < sessions.Count; i++)
             {
@@ -126,7 +130,7 @@ namespace LAM_App
             AddCell(0, totalRow, "всего", _totalBrush, 20, FontWeights.Normal);
             for (var colIndex = 0; colIndex < sessions.Count; colIndex++)
             {
-                AddCell(colIndex + 1, totalRow, sessions[colIndex].ChildrenCount.ToString(), _totalBrush, 20, FontWeights.Normal);
+                AddCell(colIndex + 1, totalRow, CountPresentChildren(sessions[colIndex].Marks).ToString(), _totalBrush, 20, FontWeights.Normal);
             }
 
             var teacherRow = totalRow + 1;
@@ -140,7 +144,7 @@ namespace LAM_App
         private void BuildGridStructure(int clientsCount, int sessionsCount)
         {
             AttendanceGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(340) });
-            for (var i = 0; i < Math.Max(1, sessionsCount); i++)
+            for (var i = 0; i < sessionsCount; i++)
             {
                 AttendanceGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(54) });
             }
@@ -155,6 +159,24 @@ namespace LAM_App
 
             AttendanceGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(36) });
             AttendanceGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(36) });
+        }
+
+        private int GetDisplayedSessionColumns(int sessionsCount)
+        {
+            const double clientColumnWidth = 340;
+            const double sessionColumnWidth = 54;
+            const double gridHorizontalMargin = 20;
+
+            var viewportWidth = AttendanceScrollViewer?.ViewportWidth ?? 0;
+            if (viewportWidth <= 0)
+            {
+                viewportWidth = AttendanceScrollViewer?.ActualWidth ?? 0;
+            }
+
+            var availableWidth = Math.Max(0, viewportWidth - gridHorizontalMargin - clientColumnWidth);
+            var columnsToFillViewport = (int)Math.Ceiling(availableWidth / sessionColumnWidth);
+
+            return Math.Max(1, Math.Max(sessionsCount, columnsToFillViewport));
         }
 
         private void AddClientCell(int row, int number, Client client)
@@ -288,6 +310,27 @@ namespace LAM_App
             return _whiteBrush;
         }
 
+        private static int CountPresentChildren(IEnumerable<AttendanceMark> marks)
+        {
+            return marks
+                .Where(m => !m.IsAbsent)
+                .Select(m => m.ClientId)
+                .Distinct()
+                .Count();
+        }
+
+        private void UpdateSessionChildrenCount(int sessionId)
+        {
+            var session = _context.attendanceSessions.FirstOrDefault(s => s.Id == sessionId);
+            if (session == null) return;
+
+            session.ChildrenCount = _context.attendanceMarks
+                .Where(m => m.SessionId == sessionId && !m.IsAbsent)
+                .Select(m => m.ClientId)
+                .Distinct()
+                .Count();
+        }
+
         private void SelectClientDebt(int clientId)
         {
             var unpaid = ((IEnumerable<SubscriptionListItem>?)cbUnpaidSubscriptions.ItemsSource)?
@@ -327,6 +370,8 @@ namespace LAM_App
                 AddMarks(session.Id, client.Id, isAbsent ? "absent" : "present", form.WriteOffCount);
             }
 
+            _context.SaveChanges();
+            UpdateSessionChildrenCount(session.Id);
             _context.SaveChanges();
             RecalculateSubscriptions(form.SelectedStyleId, form.NewSubscriptionLessons);
         }
@@ -368,6 +413,7 @@ namespace LAM_App
                 _context.attendanceMarks.RemoveRange(actualMarks);
                 AddMarks(session.Id, client.Id, form.MarkType, form.WriteOffCount);
                 _context.SaveChanges();
+                UpdateSessionChildrenCount(session.Id);
                 RecalculateSubscriptions(session.StyleId);
                 LoadPaymentSelectors();
                 LoadJournal();
@@ -638,6 +684,14 @@ namespace LAM_App
             LoadJournal();
         }
 
+        private void AttendanceScrollViewer_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (Math.Abs(e.NewSize.Width - _lastJournalViewportWidth) < 1) return;
+
+            _lastJournalViewportWidth = e.NewSize.Width;
+            LoadJournal();
+        }
+
         private void Logo_Click(object sender, RoutedEventArgs e)
         {
             var mainWindow = new MainWindow();
@@ -655,18 +709,18 @@ namespace LAM_App
             Close();
         }
 
-        private void teachers_btn_Click(object sender, RoutedEventArgs e)
+        private void payment_btn_Click(object sender, RoutedEventArgs e)
         {
             menuPopup.IsOpen = false;
-            var window = new TeachersWindow();
+            var window = new PaymentsWindow();
             window.Show();
             Close();
         }
 
-        private void styles_btn_Click(object sender, RoutedEventArgs e)
+        private void trials_btn_Click(object sender, RoutedEventArgs e)
         {
             menuPopup.IsOpen = false;
-            var window = new StylesWindow();
+            var window = new TrialsWindow();
             window.Show();
             Close();
         }

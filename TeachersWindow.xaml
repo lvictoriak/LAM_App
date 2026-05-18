@@ -48,7 +48,7 @@
         </Grid>
 
         <!-- Main Content -->
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
         <Grid Margin="10" MinWidth="1100" MinHeight="600">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -62,7 +62,8 @@
                       GridLinesVisibility="Horizontal"
                       HeadersVisibility="All"
                       AlternatingRowBackground="#F5F5F5"
-                      RowHeight="35">
+                      RowHeight="35"
+                      HorizontalScrollBarVisibility="Disabled">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Ко" Binding="{Binding Id}" Width="40" IsReadOnly="True"/>
                     <DataGridTextColumn Header="ФИО" Binding="{Binding FullName}" Width="200"/>
@@ -70,7 +71,7 @@
                     <DataGridTextColumn Header="Возраст" Binding="{Binding Age}" Width="60"/>
                     <DataGridTextColumn Header="Направление" Binding="{Binding DirectionsText}" Width="200"/>
                     <DataGridTextColumn Header="Танцевальный опыт" Binding="{Binding DanceExperience}" Width="150"/>
-                    <DataGridTextColumn Header="Комментарий" Binding="{Binding Comment}" Width="*"/>
+                    <DataGridTextColumn Header="Комментарий" Binding="{Binding Comment}" Width="*" MinWidth="220"/>
                 </DataGrid.Columns>
             </DataGrid>
 
@@ -120,10 +121,10 @@
 
         <!-- Footer -->
         <Grid Grid.Row="2" Background="#FF0068">
-            <Button HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent" 
+            <!--<Button HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent" 
                     Margin="20,0,0,0" Cursor="Hand" ToolTip="Добавить тренера" Click="BtnAddNew_Click">
                 <TextBlock Text="✏️" FontSize="26" Foreground="White"/>
-            </Button>
+            </Button>-->
         </Grid>
     </Grid>
 </Window>

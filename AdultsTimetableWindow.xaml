@@ -109,10 +109,10 @@
         </ScrollViewer>
 
         <Grid Grid.Row="2" Background="#FF0068">
-            <Button Name="note_btn1" HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent"
+            <!--<Button Name="note_btn1" HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent"
                     Margin="20,0,0,0" Cursor="Hand" ToolTip="Добавить запись" Click="note_btn1_Click">
                 <TextBlock Name="note_image" Text="✏️" FontSize="26" Foreground="White"/>
-            </Button>
+            </Button>-->
         </Grid>
     </Grid>
 </Window>

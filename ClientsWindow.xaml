@@ -48,7 +48,7 @@
         </Grid>
 
         <!-- Main Content -->
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Disabled">
         <Grid Margin="10" MinWidth="1100">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -91,14 +91,15 @@
                                           Margin="0,0,0,15"
                                           ItemsSource="{Binding Clients}"
                                           SelectionChanged="DataGrid_SelectionChanged"
-                                          LoadingRow="DataGrid_LoadingRow">
+                                          LoadingRow="DataGrid_LoadingRow"
+                                          HorizontalScrollBarVisibility="Disabled">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Фамилия" Binding="{Binding ChildSurname}" Width="120"/>
                                         <DataGridTextColumn Header="Имя" Binding="{Binding ChildName}" Width="100"/>
                                         <DataGridTextColumn Header="Родители" Binding="{Binding ParentName}" Width="200"/>
                                         <DataGridTextColumn Header="Телефон" Binding="{Binding ParentPhone}" Width="120"/>
                                         <DataGridTextColumn Header="Смена" Binding="{Binding Shift}" Width="60"/>
-                                        <DataGridTextColumn Header="ДР" Binding="{Binding BirthDate, StringFormat={}{0:dd.MM.yyyy}}" Width="100"/>
+                                        <DataGridTextColumn Header="ДР" Binding="{Binding BirthDate, StringFormat={}{0:dd.MM.yyyy}}" Width="*" MinWidth="100"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </StackPanel>
@@ -164,10 +165,10 @@
 
         <!-- Footer -->
         <Grid Grid.Row="2" Background="#FF0068">
-            <Button HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent" 
+            <!--<Button HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent" 
                     Margin="20,0,0,0" Cursor="Hand" ToolTip="Добавить клиента" Click="BtnAddNew_Click">
                 <TextBlock Text="✏️" FontSize="26" Foreground="White"/>
-            </Button>
+            </Button>-->
         </Grid>
     </Grid>
 </Window>

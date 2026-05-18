@@ -58,9 +58,89 @@
                 <ColumnDefinition Width="300"/>
             </Grid.ColumnDefinitions>
 
-            <Border Grid.Column="0" Margin="20" Background="#f60068" CornerRadius="8">
-                <!--Вставить расписание сюда-->
+            <Border Grid.Column="0" Margin="20" Background="#f60068" CornerRadius="8" Padding="18">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
+                    <TextBlock Grid.Row="0" Text="Заметки" FontSize="28" FontWeight="SemiBold"
+                               Foreground="White" Margin="0,0,0,12"/>
+
+                    <DataGrid Grid.Row="1" x:Name="dgNotes" AutoGenerateColumns="False"
+                              IsReadOnly="True" SelectionMode="Single"
+                              CanUserAddRows="False"
+                              GridLinesVisibility="Horizontal"
+                              HeadersVisibility="Column"
+                              Background="White"
+                              AlternatingRowBackground="#FFF0F6"
+                              RowHeight="32"
+                              SelectionChanged="dgNotes_SelectionChanged"
+                              HorizontalScrollBarVisibility="Disabled"
+                              ColumnWidth="SizeToHeader">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Дата" Binding="{Binding NoteDate, StringFormat={}{0:dd.MM.yyyy}}" Width="120" MinWidth="120"/>
+                            <DataGridTextColumn Header="Статус" Binding="{Binding Status}" Width="140" MinWidth="140"/>
+                            <DataGridTextColumn Header="Комментарий" Binding="{Binding Comment}" Width="*" MinWidth="300"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Border Grid.Row="2" Background="#FFE1EE" CornerRadius="6" Padding="12" Margin="0,14,0,0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Row="0" Grid.Column="0" Margin="0,0,18,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="210"/>
+                                    <ColumnDefinition Width="260"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Margin="0,0,16,0">
+                                    <TextBlock Text="Дата" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                                    <DatePicker x:Name="dpNoteDate" Height="30"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Margin="0,0,16,0">
+                                    <TextBlock Text="Статус" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                                    <ComboBox x:Name="cbNoteStatus" Height="30" SelectedIndex="0">
+                                        <ComboBoxItem Content="Задача"/>
+                                        <ComboBoxItem Content="Отчет"/>
+                                        <ComboBoxItem Content="Комментарий"/>
+                                    </ComboBox>
+                                </StackPanel>
+                            </Grid>
+
+                            <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,18,0">
+                                <TextBlock Text="Комментарий" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                                <TextBox x:Name="txtNoteComment" MinHeight="92"
+                                         TextWrapping="Wrap" AcceptsReturn="True"
+                                         VerticalScrollBarVisibility="Auto"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Bottom">
+                                <Button Content="Сохранить" Width="120" Height="30" Margin="0,0,0,8"
+                                        Background="White" BorderBrush="Transparent" Cursor="Hand"
+                                        Click="saveNote_btn_Click"/>
+                                <Button Content="Очистить" Width="120" Height="30" Margin="0,0,0,8"
+                                        Background="White" BorderBrush="Transparent" Cursor="Hand"
+                                        Click="clearNote_btn_Click"/>
+                                <Button Content="Удалить" Width="120" Height="30"
+                                        Background="White" BorderBrush="Transparent" Cursor="Hand"
+                                        Click="deleteNote_btn_Click"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Grid>
             </Border>
 
             <StackPanel Grid.Column="1" Margin="20,0,20,0" VerticalAlignment="Center">
@@ -74,10 +154,10 @@
         </ScrollViewer>
 
         <Grid Grid.Row="2" Background="#FF0068">
-            <!--Кнопка для записей-->
+            <!--Кнопка для записей
             <Button Name="note_btn1" HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent" Margin="20,0,0,0" Cursor="Hand" ToolTip="Добавить запись" Click="note_btn1_Click">
                 <TextBlock Name="note_image" Text="✏️" FontSize="26" Foreground="White" Cursor="ArrowCD"/>
-            </Button>
+            </Button> -->
         </Grid>
     </Grid>
 </Window>

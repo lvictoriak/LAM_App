@@ -49,7 +49,7 @@
         </Grid>
 
         <!-- Main Content -->
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
             <StackPanel Margin="10" MinWidth="1100">
                 <!--Таблица платежей -->
                 <Border BorderBrush="Gray" BorderThickness="1" Margin="0,0,0,10">
@@ -59,7 +59,8 @@
                               SelectionChanged="dgPayments_SelectionChanged"
                               CanUserAddRows="False"
                               GridLinesVisibility="All"
-                              HeadersVisibility="All">
+                              HeadersVisibility="All"
+                              HorizontalScrollBarVisibility="Disabled">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Дата начисления" Binding="{Binding PaymentDate, StringFormat={}{0:dd.MM.yyyy}}" Width="100"/>
                             <DataGridTextColumn Header="Приход" Binding="{Binding Income}" Width="80"/>
@@ -68,7 +69,7 @@
                             <DataGridTextColumn Header="Статья" Binding="{Binding CategoryName}" Width="150"/>
                             <DataGridTextColumn Header="Направление" Binding="{Binding StyleName}" Width="120"/>
                             <DataGridTextColumn Header="Контрагент" Binding="{Binding Contractor}" Width="150"/>
-                            <DataGridTextColumn Header="Комментарий" Binding="{Binding Comment}" Width="*"/>
+                            <DataGridTextColumn Header="Комментарий" Binding="{Binding Comment}" Width="*" MinWidth="220"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Border>
@@ -77,9 +78,9 @@
                 <GroupBox Header="Данные платежа" Margin="0,0,0,10" Padding="10">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="760"/>
                             <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="250"/>
+                            <ColumnDefinition Width="*" MinWidth="420"/>
                         </Grid.ColumnDefinitions>
 
                         <Grid Grid.Column="0">
@@ -94,7 +95,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="130"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -136,11 +137,12 @@
                         </StackPanel>
 
                         <GroupBox Grid.Column="2" Header="Должники" Margin="10,0,0,0" VerticalAlignment="Top">
-                            <DataGrid x:Name="dgDebtors" AutoGenerateColumns="False" Height="200" IsReadOnly="True">
+                            <DataGrid x:Name="dgDebtors" AutoGenerateColumns="False" Height="200" IsReadOnly="True"
+                                      HorizontalScrollBarVisibility="Disabled">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Ребенок" Binding="{Binding ChildName}" Width="120"/>
-                                    <DataGridTextColumn Header="Направление" Binding="{Binding StyleName}" Width="100"/>
-                                    <DataGridTextColumn Header="Абонемент" Binding="{Binding SubscriptionInfo}" Width="*"/>
+                                    <DataGridTextColumn Header="Ребенок" Binding="{Binding ChildName}" Width="170"/>
+                                    <DataGridTextColumn Header="Направление" Binding="{Binding StyleName}" Width="140"/>
+                                    <DataGridTextColumn Header="Абонемент" Binding="{Binding SubscriptionInfo}" Width="*" MinWidth="180"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </GroupBox>

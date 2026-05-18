@@ -46,7 +46,7 @@
             </Popup>
         </Grid>
 
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
         <Grid Margin="14,18,20,20" MinWidth="1100" MinHeight="560">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -65,12 +65,13 @@
                       AlternatingRowBackground="#F0F0F0"
                       RowHeight="26"
                       FontSize="13"
-                      Margin="0,0,24,0">
+                      Margin="0,0,24,0"
+                      HorizontalScrollBarVisibility="Disabled">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Код" Binding="{Binding Id}" Width="55"/>
                     <DataGridTextColumn Header="Направление" Binding="{Binding Name}" Width="190"/>
                     <DataGridTextColumn Header="Варианты расписания" Binding="{Binding ScheduleOptions}" Width="260"/>
-                    <DataGridTextColumn Header="Преподаватели" Binding="{Binding TeacherName}" Width="*"/>
+                    <DataGridTextColumn Header="Преподаватели" Binding="{Binding TeacherName}" Width="*" MinWidth="220"/>
                 </DataGrid.Columns>
             </DataGrid>
 
@@ -114,10 +115,10 @@
         </ScrollViewer>
 
         <Grid Grid.Row="2" Background="#FF0068">
-            <Button Name="note_btn1" HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent"
+            <!--<Button Name="note_btn1" HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent"
                     Margin="20,0,0,0" Cursor="Hand" ToolTip="Добавить направление" Click="BtnAddNew_Click">
                 <TextBlock Name="note_image" Text="✏️" FontSize="32" Foreground="White"/>
-            </Button>
+            </Button>-->
         </Grid>
     </Grid>
 </Window>

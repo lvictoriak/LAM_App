@@ -36,10 +36,10 @@
                     <StackPanel>
                         <Button Content="Клиенты" Height="45" Background="#FFB6D4" BorderBrush="Transparent"
                                 FontSize="16" Cursor="Hand" Margin="0,0,0,2" Click="clients_btn_Click"/>
-                        <Button Content="Тренеры" Height="45" Background="#FFB6D4" BorderBrush="Transparent"
-                                FontSize="16" Cursor="Hand" Margin="0,0,0,2" Click="teachers_btn_Click"/>
-                        <Button Content="Направления" Height="45" Background="#FFB6D4" BorderBrush="Transparent"
-                                FontSize="16" Cursor="Hand" Click="styles_btn_Click"/>
+                        <Button Content="Оплаты" Height="45" Background="#FFB6D4" BorderBrush="Transparent"
+                                FontSize="16" Cursor="Hand" Margin="0,0,0,2" Click="payment_btn_Click"/>
+                        <Button Content="Пробные" Height="45" Background="#FFB6D4" BorderBrush="Transparent"
+                                FontSize="16" Cursor="Hand" Click="trials_btn_Click"/>
                     </StackPanel>
                 </Border>
             </Popup>
@@ -99,7 +99,8 @@
             </Grid>
         </Border>
 
-        <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer x:Name="AttendanceScrollViewer" Grid.Row="2" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+                      SizeChanged="AttendanceScrollViewer_SizeChanged">
             <Grid x:Name="AttendanceGrid" Margin="10"/>
         </ScrollViewer>
 

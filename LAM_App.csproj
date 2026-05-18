@@ -9,6 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="LAM_App.Tests\**" />
+    <EmbeddedResource Remove="LAM_App.Tests\**" />
+    <None Remove="LAM_App.Tests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="меню иконка.png" />
     <None Remove="взрослые расписание.jpg" />
     <None Remove="индивы.jpg" />
